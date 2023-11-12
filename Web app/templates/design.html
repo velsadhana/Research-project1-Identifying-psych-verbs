@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+ 
+<!-- Head Section content -->
+<head>
+ 
+    <!-- Page title -->
+    <title>Willkommen bei den Deutschen Psych Verben!!!</title>
+
+    <style>
+	
+
+      div {
+        margin-bottom: 2vw;
+      }
+
+	 
+      body {
+	background-image: url({{ url_for('static', filename='p1.png')}});
+	background-attachment: fixed;
+	background-size: cover;
+	
+	}
+      h1 {
+	text-align: center;
+	font-size: 4vw;
+	color: blue;
+	text-shadow: -2px 2px 0 gray,
+			-4px 4px 0 gray;		
+	}
+
+      label {
+	display: inline-block;
+        font-size: 1.5vw;
+        width: 16vw;
+      }
+
+      .btn {
+       font-size:1.5vw;
+       background-color: #A0522D;
+       color:white;
+       }
+	.btn2 {
+       color:white; 
+	font-size:1.5vw; 
+	 
+	background-color: #c68c53;
+       }
+	
+	#details
+	{
+	text-align: justify;
+	color:  #1d2626; 
+	font-size:1.3vw; 
+	position: absolute; 
+	left: 2vw; 
+	top: 7vw; 
+	width: 24vw;
+	}
+
+	mark
+	{
+	color:red; 
+	font-size:2vw; 
+	
+	}
+
+      marquee{
+	color:red;
+	font-size:3vw;
+	position: absolute;
+	right: 2vw;
+	top: 7vw;
+	width: 15vw;
+	height: 20vw;
+	}
+
+	
+    
+      </style>
+</head>
+
+ 
+<!-- Body Section content -->
+<body>
+ 
+    <!-- Used to display heading content -->
+
+    <h1>
+	German psych verbs identifier
+	</h1>
+  
+    <!-- Used to get and post the form content -->
+    <form action="{{ url_for('predict')}}" method="post" style="text-align: center">
+        <div>
+        <label>
+		<b>Enter the sentence</b>
+	</label> 
+	<input type="text" name="snt" placeholder="Eg: Es freut mich" required="required" value = "{{request.form['snt']}}" style="font-size:1.5vw"/>
+	</div>
+	<div>
+        <label>
+		<b>Enter the verb position</b>
+	</label> 
+          <input type="number" name="vp" placeholder="Eg: 2" required="required" value = "{{request.form['vp']}}" style="font-size:1.5vw"/>
+	</div>
+        
+	<div>
+            <button type="submit" class="btn"> Submit </button>
+	</div> 
+        
+    </form>
+
+ {% if prediction_text %} 
+<form action="{{ url_for('back')}}" method="post" style="text-align: center;">
+<div>
+<p id="op">
+<mark>
+<b>{{ prediction_text }}</b>
+</mark>
+</p>
+</div> 
+<div> 
+<button type="submit" class="btn2">Try next sentence?</button> 
+</div> 
+ </form>
+{% endif %}
+
+ <p id="details"> 
+Psych verbs are emotional verbs which represent only emotions and no physical movements involved.
+<br>
+‘To be happy’, ‘to fear’, ‘to like’ are some examples for psych verbs.
+<br> 
+<i> For example: </i>
+<br>
+(1) She was deeply moved by that. In this sentence, 'moved' is a psych verb as it denotes only emotional meaning. 
+<br>
+(2) I moved the chair. In this sentence,'moved' is a not a psych verb as it doesn't denote emotion but only the physical movement.
+<br>
+<br>
+This app has been developed for German language.
+<br>
+When you give a German sentence with any one of these 
+<a href="{{ url_for('verbs') }}"><b>verbs</b></a>
+and the position of that verb in the sentence as inputs, 
+<br>
+then the system will identify whether the respective verb is a psych verb or not.
+
+ </p>
+
+      <marquee  direction="up"  scrollamount="1">
+	<b>Linguistic data science</b>
+      </marquee>
+
+        
+</body>
+ 
+</html>
